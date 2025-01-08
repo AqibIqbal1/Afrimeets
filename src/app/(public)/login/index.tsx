@@ -1,15 +1,30 @@
 "use client";
 import { login } from "@/api/auth";
+import { useRouter } from "next/navigation";
+import { useSnackbar } from "notistack";
 import React, { useState } from "react";
 
 const Login: React.FC = () => {
+  const router = useRouter();
   const [payload, setPayload] = useState({ email: "", password: "" });
-
+  const { enqueueSnackbar } = useSnackbar();
   const handleSubmit = async () => {
+    if (!payload.email || !payload.password) {
+      enqueueSnackbar("Email and Password are required", { variant: "error" });
+      return;
+    }
     try {
       const response = await login(payload);
-      console.log("Login Response:", response);
+      enqueueSnackbar("Login Successful", { variant: "success" });
+      if (response?.data?.token) {
+        document.cookie = `auth-token=${response?.data?.token}; path=/; SameSite=Lax`;
+        router.replace("/home");
+      }
+      console.log("Login Response !:", response?.data?.token);
     } catch (error: any) {
+      enqueueSnackbar(error?.response?.data || error.message, {
+        variant: "error",
+      });
       console.log("Login Error:", error?.response?.data || error.message);
     }
   };
