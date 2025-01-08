@@ -8,7 +8,7 @@ const signUp = async (body: any) => {
     console.log("Signup Response:", response.data);
     return response.data;
   } catch (error: any) {
-    console.error("Signup Error:", error?.response?.data || error.message);
+    console.log("Signup Error:", error?.data?.error?.message );
     throw error;
   }
 };
@@ -22,7 +22,7 @@ const login = async (body: any) => {
     console.log("Login Response:", response.data);
     return response.data;
   } catch (error: any) {
-    console.error("Login Error:", error?.response?.data || error.message);
+    console.log("Login Error:",  error?.data?.error?.message || error.message);
     throw error;
   }
 };
