@@ -1,7 +1,7 @@
 import getCookie from "@/utility/cookies";
 import axios from "axios";
 
-export const baseURL = "http://3.135.194.255:5010";
+export const baseURL = "https://backend.afrimeets.net";
 
 const ApiHandler = (isMultipart = false) => {
   const instance = axios.create({
