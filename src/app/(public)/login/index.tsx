@@ -1,6 +1,5 @@
 "use client";
 import { login } from "@/api/auth";
-import { showNotification } from "@/utility/snackbar";
 import { useRouter } from "next/navigation";
 import { useSnackbar } from "notistack";
 import React, { useState } from "react";
